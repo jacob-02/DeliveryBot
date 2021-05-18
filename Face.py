@@ -10,7 +10,6 @@ def reco():
     conf_max = 85
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     recognizer.read("trainner.yml")
-    labels = {}
     with open("labels.pickle", 'rb') as f:
         og_labels = pickle.load(f)
         labels = {v: k for k, v in og_labels.items()}
