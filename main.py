@@ -1,16 +1,16 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import os
+import click_img
+import sheet
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def reg(data):
+    print(data)
+    os.mkdir("images/" + data)
+    click_img.start(data)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    a = 1
+    consumer_column = "Sheet1!A" + str(a) + ":A" + str(a + 1)
+
+    sheet.write(data, consumer_column)
+
+    a += 1
