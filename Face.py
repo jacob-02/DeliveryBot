@@ -19,15 +19,13 @@ def reco():
 
     while True:
         ret, frame = cap.read()
+        print(frame.shape)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.1, 4)
         for (x, y, w, h) in faces:
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0),
-                          2)  # (frame,x,y,(end_cord_x,end_cord_y),color,stroke)
-
-            # print(x,y,w,h)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
             roi_gray = gray[y:y + h, x:x + w]
-            roi_color = frame[y:y + h, x:x + w]  # (cord1-height , cord2-width)
+            roi_color = frame[y:y + h, x:x + w]
             id_, conf = recognizer.predict(roi_gray)
             if conf_min <= conf <= conf_max:
                 print(id_)
@@ -41,9 +39,8 @@ def reco():
                 cp = 100 - int((temp / conf_min) * 100)
                 if cp > 73:
                     print(test.find(name))
-
-                    aa = cv2.imread("/home/jacob3006/Downloads/a.png")
-                    cv2.imshow("taddaaa", aa)
+                    a = cv2.imread('images/download.jpeg')
+                    cv2.imshow("Ordered", a)
                     cv2.waitKey(6000)
                     cv2.destroyAllWindows()
                     sys.exit()
@@ -51,11 +48,7 @@ def reco():
 
             img_item = "kau4.png"
             cv2.imwrite(img_item, roi_color)
-        # eyes=eye_cascade.detectMultiscale(roi_gray)
-        # for (ex,ey,ew,eh) in eyes:
-        #	cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (255, 0, 0), 1)
 
-        # print(ret)
         cv2.imshow('ironman', frame)
         if cv2.waitKey(1) == ord('q'):
             break
